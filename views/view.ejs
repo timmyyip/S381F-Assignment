@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<title></title>
+<style>
+  /* Always set the map height explicitly to define the size of the div
+   * element that contains the map. */
+  #map {
+    height: 100%;
+  }
+  /* Optional: Makes the sample page fill the window. */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<stype
+</head>
+<body>
+<a href="/logout" class="w3-button w3-block w3-teal" style="text-align: right">Logout</a>
+<script>
+function goBack() {window.history.back();}
+</script>
+<script>
+function loadMap ()
+{
+  var myLatLng = {lat: 35.691780, lng: 139.699367};
+  //var myLatLng = new google.maps.LatLng({lat: 35.691780, lng: 139.699367});
+  var map = new google.maps.Map(document.getElementById("map"),{
+        zoom: 18,
+        center: myLatLng
+  });
+  var marker = new google.maps.Marker({
+     position: myLatLng,
+     map: map,
+     title: 'Doutor'
+  });
+}
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkfp0OSPZ0fl8ZF3a0tea-mp36-mp_8b8&callback=loadMap"></script>
+<div class="w3-container w3-teal">
+  <h1><%=restaurantDetail[0].name%></h1>
+</div>
+<%if(restaurantDetail[0].photo_mimetype != null && restaurantDetail[0].photo_mimetype != "" ){%>
+<img src="data:<%=restaurantDetail[0].photo_mimetype%>;base64, <%=restaurantDetail[0].photo%>"
+      class="w3-image w3-border w3-padding" style="width:100%">
+<%}%>
+<div class="w3-container">
+<p>
+<label class="w3-label w3-validate">Borough: <%=restaurantDetail[0].borough%></label></p>
+<label class="w3-label w3-validate">Cuisine: <%=restaurantDetail[0].cuisine%></label></p>
+<label class="w3-label w3-validate">Street: <%=restaurantDetail[0].address.street%></label></p>
+<label class="w3-label w3-validate">Building: <%=restaurantDetail[0].address.building%></label></p>
+<label class="w3-label w3-validate">Zipcode: <%=restaurantDetail[0].address.zipcode%></label></p>
+<label class="w3-label w3-validate">GPS: </label>[<%=restaurantDetail[0].address.coord[0]%>,<%=restaurantDetail[0].address.coord[1]%>]</p>
+<label class="w3-label w3-validate">Rating: </label></p>
+<% if(restaurantDetail[0].grades != null && restaurantDetail[0].grades != ""){
+
+for(var i=0; i < restaurantDetail[0].grades.length; i++) { %>
+  <ol>
+      <li><%=restaurantDetail[0].grades[i].grade.score%> (<%=restaurantDetail[0].grades[i].grade.user%>) </li>
+  </ol>
+<%}}%>
+<p>
+<label class="w3-label w3-validate">Created by: </label><%=restaurantDetail[0].owner%></p>
+<p>
+</div>
+
+  <a href="/map?lat=<%=restaurantDetail[0].address.coord[0]%>&lon=<%=restaurantDetail[0].address.coord[1]%>">Map</a>
+
+<div class="w3-container">
+<a href="/rate?restaurant_id=<%=restaurantDetail[0].restaurant_id%>" style="text-decoration: none">
+    <button class="w3-btn w3-section w3-teal w3-ripple">Rate</button>
+</a>
+<a href="/edit?restaurant_id=<%=restaurantDetail[0].restaurant_id%>" style="text-decoration: none">
+  <button class="w3-btn w3-section w3-teal w3-ripple">Edit</button>
+</a>
+<a href="/delete?restaurant_id=<%=restaurantDetail[0].restaurant_id%>" style="text-decoration: none">
+  <button class="w3-btn w3-section w3-teal w3-ripple">Delete</button>
+</a>
+<button class="w3-btn w3-section w3-teal w3-ripple" onclick="goBack()">Go Back</button>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,95 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Restaurant</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<style type="text/css">
+  .well {
+      background: none;
+      height: 320px;
+  }
+
+  .table-scroll tbody {
+      position: absolute;
+      overflow-y: scroll;
+      height: 250px;
+  }
+
+  .table-scroll tr {
+      width: 100%;
+      table-layout: fixed;
+      display: inline-table;
+  }
+
+  .table-scroll thead > tr > th {
+      border: none;
+  }
+</style>
+
+<body>
+<a href="/logout" class="w3-button w3-block w3-teal" style="text-align: right">Logout</a>
+  <div class="jumbotron text-center container=fluid" style="background-color:009688;">
+    <h1 style="color:white;">Restaurants</h1>
+    
+      <p style="color:white;">User:<%=name%></p>
+      
+    <p style="color:white;">Showing <%=restaurantList.length%> documents</p>
+  </div>
+ <div class="jumbotron text-center container=fluid" >
+<form action="/menu" method="post" >
+  <p>
+  <label class="w3-label w3-validate">Name:</label>
+  <input name="name" class="w3-input" type="text" id="name">
+  </p>
+  <p>
+  <label class="w3-label w3-validate">borough:</label>
+  <input name="borough"class="w3-input" type="text"></p>
+  <p>
+  <label class="w3-label w3-validate">Cuisine:</label>
+  <input name="cuisine"class="w3-input" type="text">
+  </p>
+  <p>
+  <p><input type="submit" value="Search" /></p>
+</form>
+ </div>
+
+<br>
+  <div class="container-fluid">
+    <div class="row">
+      <a href="/create">
+        <button class="btn btn-default"><a href="/create">Create New Restaurant</a></button>
+      </a>
+    </div>
+
+    <div class="row">
+      <table class="table table-striped table-bordered table-hover table-scroll">
+        <thead>
+          <tr>
+            <th>Restaurant Name (Search Criteria:{<%=query%>})</th>
+          </tr>
+        </thead>
+        <tbody>
+           <% for(var i=0; i<restaurantList.length; i++) {%>
+            <tr><td><a href="/view?restaurant_id=<%=restaurantList[i].restaurant_id%>"><%=restaurantList[i].name%></a></td></tr>
+           <%}%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+    
+</body>
+</html>
