@@ -10,7 +10,7 @@ const formidable = require('formidable');
 //Database
 const MongoClient = require('mongodb').MongoClient; 
 const assert = require('assert');
-const mongourl = 'mongodb+srv://timmy:Timmy951@cluster0.l7wrd.mongodb.net/test?retryWrites=true&w=majority&useUnifiedTopology=true';
+const mongourl = '';
 const dbName = 'test'; 
 const client = new MongoClient(mongourl);
 
